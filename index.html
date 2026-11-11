@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Explore changes in April–September vegetation greenness across California from 2012 to 2023.">
+  <meta name="theme-color" content="#183d35">
+  <title>California’s Changing Greenness</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="d3.v7.min.js"></script>
+  <script defer src="data.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#explore">Skip to the map</a>
+  <header class="topbar">
+    <div class="top-inner">
+      <a class="brand" href="#top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 17 8 7l4 6 3-4 7 8M2 20h20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg> California Greenness</a>
+      <nav aria-label="Page"><a href="#explore">Explore</a><a href="#methods">Data notes</a></nav>
+    </div>
+  </header>
+  <main id="top" class="wrap">
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">DSC 106 · PROJECT 3</p>
+        <h1 id="page-title">California’s changing greenness</h1>
+        <p class="lede">How did vegetation greenness differ between drought years and wetter years in California?</p>
+      </div>
+      <div class="period"><strong>2012–2023</strong><span>April–September each year</span></div>
+    </section>
+
+    <section id="explore" aria-label="Explore California greenness">
+      <noscript><p>This visualization requires JavaScript. Enable it to use the map and chart.</p></noscript>
+      <div class="comparison-panel">
+        <div class="case-picker" aria-label="Choose a comparison">
+          <p class="control-label">1. Choose a comparison</p>
+          <div class="case-buttons">
+            <button type="button" class="preset" data-ref="2021" data-year="2023" aria-pressed="true"><strong>2021 → 2023</strong><span>Recent drought to wetter year</span></button>
+            <button type="button" class="preset" data-ref="2014" data-year="2017" aria-pressed="false"><strong>2014 → 2017</strong><span>Earlier drought to wetter year</span></button>
+          </div>
+        </div>
+        <div class="case-context">
+          <p id="case-context">2021 fell during a severe statewide drought. A wet 2023 brought statewide drought relief.</p>
+          <a href="#drought-context">Why these years?</a>
+        </div>
+        <details class="advanced">
+          <summary>Compare other years</summary>
+          <div class="toolbar">
+            <div class="reference">
+              <label for="reference">Reference year</label>
+              <select id="reference"></select>
+            </div>
+            <div class="slider-control">
+              <div class="slider-label"><label for="year">Compare with</label><output id="year-output" for="year">2023</output></div>
+              <input id="year" type="range" min="2012" max="2023" step="1" value="2023" aria-describedby="comparison-help">
+              <div class="slider-ticks" aria-hidden="true"><span>2012</span><span>2017</span><span>2023</span></div>
+            </div>
+          </div>
+        </details>
+        <span id="comparison-help" class="sr-only">In the Change view, the map shows the comparison year’s NDVI minus the reference year’s NDVI.</span>
+      </div>
+
+      <div class="dashboard">
+        <section class="card map-card" aria-labelledby="map-title">
+          <div class="card-head">
+            <div><p class="eyebrow">2. EXPLORE THE MAP</p><h2 id="map-title">Greenness in 2021</h2></div>
+            <span class="resolution">5 km grid</span>
+          </div>
+          <div class="map-modes" role="group" aria-label="Map view">
+            <button type="button" class="mode" data-mode="year" aria-pressed="true">Year by year</button>
+            <button type="button" class="mode" data-mode="change" aria-pressed="false">Show change: 2023 − 2021</button>
+          </div>
+          <div id="map-frame" class="map-frame">
+            <svg id="map" viewBox="0 0 222 226" role="group" tabindex="0" aria-labelledby="map-svg-title" aria-describedby="map-instructions">
+              <title id="map-svg-title">California seasonal greenness in 2021</title>
+            </svg>
+            <div class="map-buttons" aria-label="Map zoom controls">
+              <button id="zoom-in" type="button" aria-label="Zoom in" title="Zoom in">+</button>
+              <button id="zoom-out" type="button" aria-label="Zoom out" title="Zoom out">−</button>
+              <button id="reset" type="button" aria-label="Reset map view" title="Reset map view">Reset</button>
+            </div>
+            <div class="north" aria-hidden="true">↑ N</div>
+            <div class="map-scale" aria-hidden="true"><span id="scale-line"></span><span id="scale-label">100 km</span></div>
+            <div id="map-tooltip" class="tooltip" hidden></div>
+          </div>
+          <div id="timeline" class="timeline">
+            <div class="timeline-head"><label for="map-year">Move through time</label><output id="map-year-output" for="map-year">2021</output></div>
+            <input id="map-year" type="range" min="2021" max="2023" step="1" value="2021">
+            <div id="timeline-years" class="timeline-years"></div>
+          </div>
+          <p id="change-explanation" class="map-instructions" hidden></p>
+          <p id="map-instructions" class="map-instructions">Click a cell for its values and history. Use + / − to zoom. <a id="jump-to-trend" href="#trend-title" hidden>View selected cell ↓</a></p>
+          <p class="sr-only" id="keyboard-help">On the focused map, arrow keys select a cell and Shift plus arrow keys pan. Plus and minus zoom. Escape clears selection.</p>
+          <div class="legend">
+            <div class="legend-head"><strong id="legend-title">Shared greenness scale (NDVI)</strong><span><i class="empty-key"></i> Outside sample</span></div>
+            <div id="legend-classes" class="legend-classes"></div>
+          </div>
+        </section>
+
+        <div class="side">
+          <section class="card summary-card" aria-labelledby="summary-title">
+            <div class="card-head"><div><p class="eyebrow">FULL-PERIOD COMPARISON</p><h2 id="summary-title">How greenness changed</h2></div></div>
+            <p id="mean-change" class="mean-change"></p>
+            <div id="summary-strip" class="summary-strip" aria-hidden="true"></div>
+            <dl id="summary-counts" class="summary-counts"></dl>
+            <p id="summary-caption" class="small">Share of 16,933 cells; small change means within ±0.02 NDVI.</p>
+          </section>
+          <section class="card trend-card" aria-labelledby="trend-title">
+            <div class="card-head">
+              <div><p class="eyebrow">3. FOLLOW A PLACE OVER TIME</p><h2 id="trend-title">California’s seasonal trend</h2><p id="selection-location" class="small">Select a map cell to compare its history.</p></div>
+              <button id="clear" type="button" class="text-button" hidden>Clear cell</button>
+            </div>
+            <div id="selection-values" class="selection-values" aria-live="polite" hidden></div>
+            <div class="trend-key"><span><i class="state-key"></i> California mean</span><span id="cell-key" hidden><i class="cell-key"></i> Selected cell</span></div>
+            <svg id="trend" viewBox="0 0 420 220" role="img" aria-labelledby="trend-svg-title trend-svg-desc"></svg>
+            <p id="trend-note" class="small trend-note">Hollow points mark the drought year. Filled large points mark the wetter year.</p>
+          </section>
+        </div>
+      </div>
+      <p id="status" class="sr-only" role="status"></p>
+    </section>
+
+    <section id="methods" class="methods" aria-labelledby="methods-title">
+      <div><p class="eyebrow">READING THE MAP</p><h2 id="methods-title">Data notes</h2></div>
+      <div class="methods-grid methods-grid-publish">
+        <div>
+          <h3>What we measure</h3>
+          <p>NDVI is a satellite index of vegetation greenness. The year views show the seasonal value. The change view subtracts the drought year’s NDVI from the wetter year’s NDVI (or comparison minus reference for custom years). Greenness also responds to factors such as irrigation, land use, and fire; the comparisons do not isolate the effect of drought.</p>
+        </div>
+        <div>
+          <h3>How the sample was built</h3>
+          <p>The 12 California GeoTIFFs were exported from <a href="https://doi.org/10.5067/MODIS/MOD13A2.061">NASA Terra MODIS MOD13A2.061</a>. The export averaged good-quality observations with composite start dates in April–September, then aggregated to 5 km California Albers cells. We retained 16,933 cells with valid NDVI in all 12 years. Missing or fill values were excluded; valid negative values were kept.</p>
+          <p>Percentages count cells. Border cells are not weighted by the fraction inside California. The GeoTIFFs do not contain per-season observation counts.</p>
+        </div>
+      </div>
+      <div id="drought-context" class="drought-context">
+        <h3>Why these years?</h3>
+        <p>California Department of Water Resources reports describe <a href="https://water.ca.gov/-/media/DWR-Website/Web-Pages/Water-Basics/Drought/Files/Publications-And-Reports/CNRA-Drought-Report-final-March-2021.pdf">2014</a> and <a href="https://water.ca.gov/-/media/DWR-Website/Web-Pages/Programs/Groundwater-Management/Data-and-Tools/Files/Statewide-Reports/Groundwater-Conditions-Report-Fall-2021.pdf">2021</a> as especially dry years during separate droughts. <a href="https://water.ca.gov/-/media/DWR-Website/Web-Pages/Water-Basics/Drought/Files/Resources/Water-Year-2017---What-a-Difference-a-Year-Makes.pdf">2017</a> and <a href="https://water.ca.gov/News/Blog/2023/Oct-23/DWR-releases-Semi-Annual-Groundwater-Conditions-Report-with-Look-Back-at-2023-Water-Year">2023</a> were wetter years that brought statewide relief, though local impacts could persist.</p>
+        <p>These reports provide statewide context for choosing examples. The graphs and maps use only MODIS NDVI. Water years end in September; each NDVI value covers the April–September season of the named year.</p>
+      </div>
+    </section>
+    <footer class="footer"><span>California’s Changing Greenness</span><span>MODIS · April–September · 2012–2023</span></footer>
+  </main>
+</body>
+</html>

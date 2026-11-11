@@ -1,0 +1,62 @@
+{
+  "archive": {
+    "file": "California_MODIS_NDVI-20261105T004516Z-1-001.zip",
+    "sha256": "1db0e482bae326d198ce6dc683eeb822c601278d09f63ead2a8720bbde06961e"
+  },
+  "files": [
+    {
+      "file": "original_tiffs/NDVI_2012.tif",
+      "sha256": "bf04bde6bbf17393cd81228aefcf21efe803ebc6c25d470590df3cd26544a2dd"
+    },
+    {
+      "file": "original_tiffs/NDVI_2013.tif",
+      "sha256": "a50f9cf095ac85ddd56941febd911fd24be0ba01369c5e7fa79fcbe50ed5d8eb"
+    },
+    {
+      "file": "original_tiffs/NDVI_2014.tif",
+      "sha256": "85c506bdd3288714213a1a25fa2cb955a4dae2a886318d95397c6b2650bde180"
+    },
+    {
+      "file": "original_tiffs/NDVI_2015.tif",
+      "sha256": "e9eb9d0cee430f2a4d536635d731f12685734917fbeeb61798109dd3ba2c8908"
+    },
+    {
+      "file": "original_tiffs/NDVI_2016.tif",
+      "sha256": "4d8659572f3bae345712d9a807e3aebafe793a7c969791a1152d491c9632c9e0"
+    },
+    {
+      "file": "original_tiffs/NDVI_2017.tif",
+      "sha256": "17e354f70d0214e773c1a64fca92e9e236d39e730ca443b49c587a9379f9722b"
+    },
+    {
+      "file": "original_tiffs/NDVI_2018.tif",
+      "sha256": "4c072a4bb02f0bd6b8ec6e3b224787fa063c5103aa1e43b97d187b16c5d0ae8e"
+    },
+    {
+      "file": "original_tiffs/NDVI_2019.tif",
+      "sha256": "8f737b5ce5f50e6439ec41536e0e0f8732a90d884d3ada48e613dcf28f5187cf"
+    },
+    {
+      "file": "original_tiffs/NDVI_2020.tif",
+      "sha256": "0928496dac63a242b4146bb03447b1bb35202271f0ac03fd61b8f727bc99b374"
+    },
+    {
+      "file": "original_tiffs/NDVI_2021.tif",
+      "sha256": "3acfc5d680b8bd2118fcf75d6ab0ff882f66f68aa65ce74edbe1ebfd47865c1a"
+    },
+    {
+      "file": "original_tiffs/NDVI_2022.tif",
+      "sha256": "81d96b5c0efe795dfb5e7e52b7be1cb4efb4a4c168f076c02a75a92090ae32be"
+    },
+    {
+      "file": "original_tiffs/NDVI_2023.tif",
+      "sha256": "1ff8b7dd682babfa88727662b1f7b0adc45da5f064ec4ba73514a5c24a35717a"
+    }
+  ],
+  "source_product": "MODIS/061/MOD13A2",
+  "source_doi": "https://doi.org/10.5067/MODIS/MOD13A2.061",
+  "provenance_basis": "Export script supplied by user through shared chat; raster grid and nodata verified independently.",
+  "provenance_url": "https://chatgpt.com/share/6aebd2b3-d484-83e8-ba2b-c479b3f6e6b0",
+  "temporal_definition": "Mean of quality-approved 16-day composite observations with start dates April 1 through September 30, per year.",
+  "spatial_definition": "Native approximately 1 km MOD13A2 aggregated by mean to EPSG:3310 at 5000 m, clipped to TIGER/2018/States California geometry."
+}
