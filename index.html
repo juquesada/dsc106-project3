@@ -128,30 +128,34 @@
         </div>
       </div>
       <div><h3>Rationale</h3>
-        <p>Our main goal for this visualization was to show how vegetation in California changed over time during periods of drought and wetter years. 
-        In order to display this information, 
-        we considered many different marks and visualizations to best present our vegetation data. Namely, we used area maps and line marks. 
-        The pros for using a line mark visual is that it is easy to identify clear shifts/differences in vegetation over time however it does 
-        not capture the data for specific areas and the pros for an area map visualization is that it is easy to read and see data for specific 
-        parts of California but it is difficult to see clear differences as well as the magnitude of such differences. For these reasons, in 
-        our final visual, we decided to use both types; we used an area map of California using color and position to encode data for our main 
-        graph while using a line graph to see a more accurate change in vegetation for any given point on the map. For our map, we choose to use
-        an interactive slider because it allows readers to easily see the difference in vegetation for different years by comparing the colors 
-        of the two years. Using colors as the main channel to convey information is effective because it shows the vegetation levels of each area 
-        in an easily digestible way for readers. Because of the cons of a map visualization, we decided to include an interactive line graph where 
-        readers can click any point on the map and a line visualization that shows the change in NDVI compared to California’s mean NDVI over time 
-        will appear. This ensured that we accounted for the pros and the cons for both types of visuals while creating a fun interactive design. 
-        Additionally, in order to highlight the stark differences between drought periods and wetter years, we decided to add two main timeframes 
-        for comparison, 2014-2017 and 2021-2023. These years clearly demonstrate the change when California was in a drought (2014, 2021) to wetter 
-        years (2017, 2023). We did this to make it easier for the reader to see the effects of a drought instead of having to randomly pick years to 
-        compare, since comparing two drought years or two wet years would not provide a lot of useful information. We also added an interactive zoom 
-        feature. We added this because it makes it easier for readers to choose a specific area to look at instead of the whole of California. Finally,
-        we added a map that shows the change in NDVI for two years with green being an increase, orange being a decrease, and gray being small/no change.
-        We added this noninteractive feature to clearly underline which areas gained/lost vegetation over time and to show this change over all of California. An 
-        alternative interactive technique we considered was a different type of slider that had two years in the same map and the slider would show 
-        one year on one side and another year on the other. We ultimately chose not to use this technique because it was more difficult to see gradual 
-        changes over time since it would only allow for the comparison of two years at a time and we wanted to emphasize the effect that droughts had 
-        on California vegetation over a period of time.</p>
+        <p>Our main goal for this visualization was to show how vegetation greenness in California changed between drought years and wetter years. We chose 
+          two main timeframes, 2014–2017 and 2021–2023, to give readers a starting point without having to pick years themselves. We also used data from April 
+          through September each year so that we could compare greenness during the same part of the seasonal cycle. This ensures that the change in vegetation 
+          is not due to a change in seasons. These comparisons show how greenness differed between years, but it is important to note that they do not establish 
+          that drought caused those differences. In order to display this information, we considered many different marks and visualizations to best present our 
+          vegetation data. Namely, we used area maps and line marks. The pros for using a line mark visual is that it is easy to identify clear shifts/differences 
+          in vegetation over time however it does not capture the data for specific areas and the pros for an area map visualization is that it is easy to read 
+          and see data for specific parts of California but it is difficult to see clear differences as well as the magnitude of such differences. For these reasons, 
+          in our final visual, we decided to use both types; we used an area map of California using color and position to encode data for our main graph while using 
+          a line graph to see a more accurate change in vegetation for any given point on the map. The map makes it easy to see where greenness varies across 
+          California: position identifies each 5 km cell, and color shows its NDVI range. We kept the green color scale fixed so that the same shade represents the 
+          same range every year. Because small differences can be hard to see by switching between maps, we added Show change, which subtracts the starting year’s 
+          NDVI from the ending year’s NDVI and shows three categories: less green, small change (within ±0.02 NDVI), and greener. For our map, we choose to use an 
+          interactive slider because it allows readers to easily see the difference in vegetation for different years by comparing the colored map of the two years. 
+          Using colors as the main channel to convey information is effective because it shows the vegetation levels of each area in an easily digestible way for 
+          readers. Because of the cons of a map visualization, we decided to include an interactive line graph where readers can click any point on the map and a 
+          line visualization that shows the change in NDVI compared to California’s mean NDVI over time will appear. The line graph makes it easier to see when that 
+          location followed or differed from the overall pattern. This ensured that we accounted for the pros and the cons for both types of visuals while creating a 
+          fun interactive design. As mentioned before, in order to highlight the stark differences between drought periods and wetter years, we decided to add two main 
+          timeframes for comparison, 2014-2017 and 2021-2023. These years clearly demonstrate the change when California was in a drought (2014, 2021) to wetter years 
+          (2017, 2023). We did this to make it easier for the reader to see the effects of a drought instead of having to randomly pick years to compare, since 
+          comparing two drought years or two wet years would not provide a lot of useful information. We also added an interactive zoom feature. We added this because 
+          it makes it easier for readers to choose a specific area to look at instead of the whole of California. An alternative interactive technique we considered was 
+          a different type of slider that had two years in the same map and the slider would show one year on one side and another year on the other. Dragging right felt 
+          like moving forward in time, but it revealed more of the earlier year. We ultimately chose not to use this technique because it was more difficult to see 
+          gradual changes over time since it would only allow for the comparison of two years at a time and we wanted to emphasize the effect that droughts had on 
+          California vegetation over a period of time. We chose a timeline below the map instead, so moving right advances through the years in order and shows one full 
+          map for each year. The map keeps the same zoom and selected cell, making it easier to follow one place over time.</p>
       </div>
       <div><h3>Overview of Development</h3>
         <p>Our team consisted of Justin Quesada, Will Shin, and Justin Shiu. We divided the work evenly, with each member responsible for a major component 
@@ -169,9 +173,9 @@
           <p>Justin Quesada focused on the trend chart, summary statistics, and overall page design. He connected the supporting charts to the map selection 
             and styled the layout, legends, and controls to keep the interface consistent. </p>
         </div>
-        <p>We estimate that we spent approximately 20 people-hours on the application, with each member contributing about 7 hours. Data preparation, map 
-          interactions, and coordinating updates across the visualizations took the most time. We worked iteratively, beginning with a basic map and then 
-          adding comparisons, supporting charts, and interface improvements. All three members shared responsibility for testing the controls, checking 
+        <p>We estimate that we spent approximately 20 people-hours on the application, with each member contributing about 7 hours. We worked on Data preparation, map 
+          interactions, and coordinating updates across the visualizations most of the time. We started with a basic map and then 
+          added comparisons, supporting charts, and interface improvements. All three members shared responsibility for testing the controls, checking 
           displayed values, refining the colors, and revising the explanatory text.</p>
       </div>
     </section>
